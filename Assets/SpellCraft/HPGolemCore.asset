@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bd0444d93e16f442a73c7b348aaac91, type: 3}
-  m_Name: MironovCore
+  m_Name: HPGolemCore
   m_EditorClassIdentifier: 
   _sprite: {fileID: 21300000, guid: 4c1db682371f9714594e2f8be77590b3, type: 3}
   _stats:
-    _damage: 10
+    _damage: 25
     _type: 1
-    _name: "\u0413\u043B\u0430\u0432\u043D\u044B\u0439 \u0435\u0431\u0443\u043D"
-    _prefabs: {fileID: 1067925524328404, guid: 6bbfea6690ef7724ba495c866081f855, type: 3}
+    _name: HP Ice Golem
+    _prefabs: {fileID: 1438169871030806, guid: c9bc790a133e19c40b64d6db4cfb7a22, type: 3}
