@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f725be7805461649ad7d70683dc2654, type: 3}
+  m_Name: HPGolem
+  m_EditorClassIdentifier: 
+  _sprite: {fileID: 1458392433, guid: 9282b55035d14ea45ab48bb19b18a54a, type: 3}
+  _stats:
+    _damage: 10
+    _type: 0
+    _name: "\u0416\u0430\u0440\u043A\u0438\u0439 \u043A\u0430\u043A \u0442\u0432\u043E\u0451
+      \u043E\u0447\u043A\u043E"
+  _spellObject: {fileID: 1438169871030806, guid: c9bc790a133e19c40b64d6db4cfb7a22, type: 3}

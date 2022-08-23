@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f725be7805461649ad7d70683dc2654, type: 3}
+  m_Name: NonEGolem
+  m_EditorClassIdentifier: 
+  _sprite: {fileID: 21300000, guid: 4c1db682371f9714594e2f8be77590b3, type: 3}
+  _stats:
+    _damage: 0
+    _type: 2
+    _name: "\u041D\u0435 \u0433\u043E\u043B\u0435\u043C"
+  _spellObject: {fileID: 100000, guid: 95965ef6457481f488a1ab90243909eb, type: 3}
