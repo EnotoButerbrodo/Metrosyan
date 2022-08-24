@@ -1,12 +1,12 @@
 using System;
-
+using UnityEngine;
 [Serializable]
-public class Inventory
+public class Inventory : MonoBehaviour
 {
-    public event Action<Magic> AddSlot;
+    public Action<Magic> OnAddSlot;
 
     public void AddSlotAction(Magic spell)
     {
-        AddSlot?.Invoke(spell);
+        OnAddSlot?.Invoke(spell);
     }
 }

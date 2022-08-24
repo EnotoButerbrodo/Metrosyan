@@ -13,16 +13,16 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private Transform _spawnDot;
 
     public static InventoryUI _instance;
-    public Inventory _inventory = new Inventory();
+    public Inventory _inventory;
     void Start()
     {
         _instance = this;
-        _inventory.AddSlot += AddItemSlots;
+        _inventory.OnAddSlot += AddItemSlots;
     }
 
     private void OnDisable()
     {
-        _inventory.AddSlot -= AddItemSlots;
+        _inventory.OnAddSlot -= AddItemSlots;
     }
     private void AddItemSlots(Magic spell)
     {
@@ -31,13 +31,14 @@ public class InventoryUI : MonoBehaviour
         buttonSpell.GetComponentInChildren<TextMeshProUGUI>().text = 
             String.Format("Type main core = {0}, extra = {1}",spell._spell.Stats.Type, spell._extra.Type);
         buttonSpell.GetComponent<Image>().sprite = spell._spell.Sprite;
-        buttonSpell.onClick.AddListener (delegate {InformationForSpell(spell); } ) ;
+        buttonSpell.onClick.AddListener (delegate {InformationForSpell(_uiSlots.Count-1); } ) ;
+        
     }
 
-    private void InformationForSpell(Magic magic)
+    private void InformationForSpell(int i)
     {
-        
-        GameObject test = Instantiate(magic._spell.SpellObject,_spawnDot.position,_spawnDot.rotation);
+        Debug.Log("Номер магии = " + i);
+        GameObject test = Instantiate(_uiSlots[i]._spell.SpellObject,_spawnDot.position,_spawnDot.rotation);
         Destroy(test,3f);
     }
 }
