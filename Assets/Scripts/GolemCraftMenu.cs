@@ -1,27 +1,35 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class GolemCraftMenu : Menu
+public class GolemCraftMenu : Menu, IInputLisener
 {
     public SpellUnityEvent SpellCrafted;
     public SpellUnityEvent SpellAdding;
 
     [SerializeField] private CoreSlot _typeSlot;
     [SerializeField] private CoreSlot _extraSlot;
-    [SerializeField] private GolemFactory _golemFactory;
-
+    [SerializeField] private GolemCastFactory _golemFactory;
+    [SerializeField] private AuraFactory _auraFactory;
     [SerializeField] private InputActionReference _openCloseInput;
 
     private Spell _craftedGolem;
-
+    
     public void Craft()
     {
         if (_typeSlot.CurrentItem is null)
             return;
 
         _craftedGolem  = _golemFactory.Get(_typeSlot.CurrentItem);
+
+        if(_extraSlot.CurrentItem != null)
+        {
+            var aura = _auraFactory.Get(_extraSlot.CurrentItem);
+            (_craftedGolem as GolemCast).SetStartBuffs(new[] { aura });
+        }
+
         SpellCrafted?.Invoke(_craftedGolem);
     }
 
@@ -47,6 +55,17 @@ public class GolemCraftMenu : Menu
         base.Close();
     }
 
+    public void EnableInput()
+    {
+        _openCloseInput.action.Enable();
+    }
+
+    public void DisableInput()
+    {
+        _openCloseInput.action.Disable();
+    }
+
+
     protected override void OnAwake()
     {
         base.OnAwake();
@@ -65,6 +84,8 @@ public class GolemCraftMenu : Menu
             }
         };
     }
+
+
 }
 
 [System.Serializable]

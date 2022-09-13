@@ -1,29 +1,29 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Golem", menuName = "SpellCraft/Golem")]
-public class Golem : Spell
+public class Golem : Unit
 {
+    [SerializeField] private Attack _attackHandler;
+    [SerializeField] Spell[] _startBuffs;
 
-    [SerializeField] private IAttack _attackHandler;
-    
-    public void Init(IAttack attack, Core typeCore)
+    public void Init(Attack attack, IEnumerable startBuffs = null)
     {
         _attackHandler = attack;
-        TypeCore = typeCore;
+        if(startBuffs != null)
+        {
+            foreach(Spell spell in startBuffs)
+            {
+                spell.Use(transform.position, transform.rotation.eulerAngles, target: gameObject);
+            }
+        }
     }
 
-    public override void Use(Vector3 castPosition, Vector3 direction)
-    {
-        var golem = Instantiate(_spellPrefab, castPosition, Quaternion.identity);
-        golem.GetComponent<MeshRenderer>().material.color = TypeCore.Color;
 
-        Attack();
-    }
 
     private void Attack()
     {
         _attackHandler.Hit();
     }
-  
 }
 

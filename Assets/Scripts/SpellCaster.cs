@@ -1,45 +1,63 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SpellCaster : MonoBehaviour
+public class SpellCaster : MonoBehaviour, IInputLisener
 {
-    [SerializeField] private SpellSign _spellSign;
+    [SerializeField] private SpellSight _spellSign;
     [SerializeField] private InputActionReference _castInput;
     [SerializeField] private SpellQuickbar _spellQuickbar;
 
-
-    public void Enable()
-    {
-        _castInput.action.Enable();
-    }
-
-    public void Disable()
-    {
-        _castInput.action.Disable();
-    }
-
     private void OnEnable()
     {
-        Enable();
+        EnableInput();
+        _castInput.action.started += OnCastStart;
         _castInput.action.performed += OnCastPressed;
+
+        _spellSign.Hide();
+
     }
 
 
-    public void Cast(Spell spell)
+    private void OnDisable()
     {
-        Debug.Log($"Кастую в точку {_spellSign.Position} заклинание {spell.name}");
-        spell.Use(_spellSign.Position, Vector3.zero);
+        DisableInput();
+        _castInput.action.performed -= OnCastPressed;
+        _castInput.action.started -= OnCastStart;
+
+    }
+
+    private void OnCastStart(InputAction.CallbackContext obj)
+    {
+        if (_spellQuickbar.IsSpellSelected == false)
+            return;
+
+        _spellSign.Show();
     }
 
     private void OnCastPressed(InputAction.CallbackContext context)
     {
-        if (_spellQuickbar.SelectedSpell is null)
-        {
+        if (_spellQuickbar.IsSpellSelected == false)
             return;
-        }
-        Spell spell = _spellQuickbar.SelectedSpell;
-        Cast(spell);
+        
+        Cast(_spellQuickbar.SelectedSpell);
     }
 
+    public void Cast(Spell spell)
+    {
+        Debug.Log($"РЇ РєР°СЃС‚СѓСЋ РІ РїРѕР·РёС†РёСЋ {_spellSign.Position} Р·Р°РєР»РёРЅР°РЅРёРµ");
+        spell.Use(_spellSign.Position, Vector3.zero);
+    }
 
+    public void EnableInput()
+    {
+        _castInput.action.Enable();
+        _spellSign.EnableInput();
+    }
+
+    public void DisableInput()
+    {
+        _castInput.action.Disable();
+        _spellSign.DisableInput();
+    }
 }
