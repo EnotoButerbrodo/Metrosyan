@@ -11,6 +11,7 @@ public class Aura : Spell
 
     private Attack _auraAttack;
 
+    public override CastType CastType => CastType.Target;
 
     public void Init(Attack auraAttack, AuraConfig auraConfig)
     {
@@ -18,7 +19,7 @@ public class Aura : Spell
         _auraConfig = auraConfig;
     } 
 
-    public override void Use(Vector3 castPosition, Vector3 direction, GameObject target)
+    public override void Use(Ray direction, GameObject target)
     {
         var auraEffect = target.AddComponent<AuraEffect>();
         auraEffect.Init(_auraAttack, _auraConfig);

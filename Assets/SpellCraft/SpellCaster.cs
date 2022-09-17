@@ -7,12 +7,12 @@ public class SpellCaster : MonoBehaviour, IInputLisener
     public UnityEvent NotEnouthStamina;
     [SerializeField] private SpellSight _spellSign;
     [SerializeField] private InputActionReference _castInput;
-    [SerializeField] private SpellQuickbar _spellQuickbar;
+    [SerializeField] private SpellInventory _spellQuickbar;
     [SerializeField] private Stamina _stamina;
 
-    public void Cast(Spell spell, Vector3 castPosition = default(Vector3), Vector3 direction = default(Vector3), GameObject target = null)
+    public void Cast(Spell spell, Ray direction, GameObject target = null)
     {
-        float neededStamina = spell.Core.Stats.StaminaCost;
+        float neededStamina = 1;
         if (spell is GolemCast)
         {
             neededStamina = _stamina.MaxStamina;
@@ -20,7 +20,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
 
         if (_stamina.TrySpend(neededStamina))
         {
-            spell.Use(castPosition, direction, target);
+            spell.Use(direction, target);
         }
         else
         {
@@ -65,16 +65,16 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         switch (spell.CastType)
         {
             case CastType.Call:
-                Cast(spell, _spellSign.Position, Vector3.zero);
+                Cast(spell, new Ray(_spellSign.Position, Vector3.zero));
                 break;
             case CastType.Shoot:
-                Cast(spell, transform.position, _spellSign.transform.position - transform.position);
+                Cast(spell, new Ray(transform.position, _spellSign.transform.position - transform.position));
                 break;
             case CastType.Target:
-                Cast(spell, transform.position, Vector3.zero, gameObject);
+                Cast(spell, new Ray(transform.position, Vector3.zero), gameObject);
                 break;
             default:
-                Cast(spell, transform.position, _spellSign.transform.position - transform.position);
+                Cast(spell, new Ray(transform.position, _spellSign.transform.position - transform.position));
                 break;
         }
 

@@ -9,7 +9,7 @@ public class SpellCraftMenuProvider : MonoBehaviour
     public UnityEvent OnSpellAddFail;
 
     [SerializeField] private SpellCraftMenu _craftMenu;
-    [SerializeField] private SpellQuickbar _spellQuickbar;
+    [SerializeField] private SpellInventory _spellQuickbar;
 
     [SerializeField] private Button _addButton;
 

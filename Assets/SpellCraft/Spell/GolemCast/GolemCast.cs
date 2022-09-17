@@ -10,11 +10,12 @@ public class GolemCast : Spell
 
     private IEnumerable _startBuffs;
 
+    public override CastType CastType => CastType.Call;
+
     public void Init(Golem prefab, Attack attack, Core core)
     {
         _prefab = prefab;
         _attack = attack;
-        _core = core;
     }
 
     public void SetStartBuffs(IEnumerable spells)
@@ -22,9 +23,9 @@ public class GolemCast : Spell
         _startBuffs = spells;
     }
     
-    public override void Use(Vector3 castPosition, Vector3 direction, GameObject target)
+    public override void Use(Ray direction, GameObject target)
     {
-        var golem = GameObject.Instantiate(_prefab, castPosition, Quaternion.Euler(direction));
+        var golem = GameObject.Instantiate(_prefab, direction.origin, Quaternion.Euler(direction.direction));
         golem.Init(_attack, _startBuffs);
     }
 }

@@ -14,7 +14,7 @@ public class Golem : Unit
         {
             foreach(Spell spell in startBuffs)
             {
-                spell.Use(transform.position, transform.rotation.eulerAngles, target: gameObject);
+                spell.Use(new Ray(transform.position, transform.rotation.eulerAngles), gameObject);
             }
         }
     }
