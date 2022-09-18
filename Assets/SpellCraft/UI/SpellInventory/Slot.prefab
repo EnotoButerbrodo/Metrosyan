@@ -469,7 +469,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slotImage: {fileID: 3683456388718347029}
-  _spritesStorage: {fileID: 11400000, guid: e822ffd3f4388c84bb77f8c4528359c2, type: 2}
 --- !u!114 &4042989620014532711
 MonoBehaviour:
   m_ObjectHideFlags: 0

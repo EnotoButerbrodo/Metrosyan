@@ -7,7 +7,6 @@ public abstract class SlotPresenter<TItem> : MonoBehaviour
     where TItem : IStorable
 {
     [SerializeField] protected Image _slotImage;
-    [SerializeField] protected SpritesStorage _spritesStorage;
 
     private ISlotNotification<TItem> _slot;
 

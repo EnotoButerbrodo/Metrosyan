@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,9 +13,9 @@ public class SpellSight : MonoBehaviour, IInputLisener
     [SerializeField] private LayerMask _groundMask;
 
     private Camera _camera;
+    private Transform _transform;
 
     private bool _enabled = false;
-
 
     public void EnableInput()
     {
@@ -25,8 +26,6 @@ public class SpellSight : MonoBehaviour, IInputLisener
     {
         _cursorInput.action.Disable();
     }
-
-    
 
     private void LateUpdate()
     {
@@ -61,14 +60,13 @@ public class SpellSight : MonoBehaviour, IInputLisener
 
     private void Move(Vector3 position)
     {
-        transform.position = position;
+        _transform.position = position;
     }
 
     private void ChangeColor(Color color)
     {
         _spriteRenderer.color = color;
     }
-
 
     public void Show()
     {
@@ -85,7 +83,7 @@ public class SpellSight : MonoBehaviour, IInputLisener
     private void Awake()
     {
         _camera = Camera.main;
-        Hide();
+        _transform = GetComponent<Transform>();
     }
 
     private void OnEnable()

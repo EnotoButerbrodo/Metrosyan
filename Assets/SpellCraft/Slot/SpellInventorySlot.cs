@@ -10,7 +10,6 @@ public class SpellInventorySlot : MonoBehaviour
     public Action<SpellInventorySlot> Selected;
     public Action<SpellInventorySlot> Diselected;
 
-    public Timer SlotTimer => _link.ReloadTimer;
     public SpellSlot Slot => _link.SpellSlot;
     public Timer SlotReloadTimer => _link.ReloadTimer;
     public bool IsSelected { get; private set; }
@@ -37,27 +36,7 @@ public class SpellInventorySlot : MonoBehaviour
         _link = GetComponent<SpellInventorySlotLink>();
     }
 
-    private void OnEnable()
-    {
-        _link.InputAction.action.Enable();
-        _link.InputAction.action.performed += OnInput;
-    }
 
-    private void OnDisable()
-    {
-        _link.InputAction.action.Disable();
-        _link.InputAction.action.performed -= OnInput;
-    }
-    private void OnInput(InputAction.CallbackContext c)
-    {
-        if (IsSelected)
-        {
-            Diselect();
-        }
-        else
-        {
-            Select();
-        }
-    }
+
 
 }

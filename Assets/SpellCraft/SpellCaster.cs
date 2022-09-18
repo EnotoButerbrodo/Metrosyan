@@ -14,29 +14,17 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         spell.Use(reloadTimer, direction, target);
     }
 
-    private void Awake()
-    { 
-        _spellSign.Hide();
-    }
-      
-    private void OnEnable()
+    public void EnableInput()
     {
-        EnableInput();
-        _castInput.action.performed += OnCastPressed;
-        _spellQuickbar.SpellSelected += _spellSign.Show;
-        _spellQuickbar.SpelDiselected += _spellSign.Hide;
-
+        _castInput.action.Enable();
+        _spellSign.EnableInput();
     }
-    private void OnDisable()
+
+    public void DisableInput()
     {
-        DisableInput();
-        _castInput.action.performed -= OnCastPressed;
-        _spellQuickbar.SpellSelected -= _spellSign.Show;
-        _spellQuickbar.SpelDiselected -= _spellSign.Hide;
-
+        _castInput.action.Disable();
+        _spellSign.DisableInput();
     }
-
-
 
     private void OnCastPressed(InputAction.CallbackContext context)
     {
@@ -47,7 +35,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         }
 
         SpellInventorySlot slot = _spellQuickbar.SelectedSlot;
-        Timer reloadTimer = _spellQuickbar.SelectedSlot.SlotTimer;
+        Timer reloadTimer = _spellQuickbar.SelectedSlot.SlotReloadTimer;
         Spell spell = slot.Slot.CurrentItem;
 
         switch (spell.CastType)
@@ -68,16 +56,23 @@ public class SpellCaster : MonoBehaviour, IInputLisener
 
         
     }
-    public void EnableInput()
+
+    private void OnEnable()
     {
-        _castInput.action.Enable();
-        _spellSign.EnableInput();
+        EnableInput();
+        _castInput.action.performed += OnCastPressed;
+        _spellQuickbar.SlotSelected += _spellSign.Show;
+        _spellQuickbar.SlotDiselected += _spellSign.Hide;
+
+    }
+    private void OnDisable()
+    {
+        DisableInput();
+        _castInput.action.performed -= OnCastPressed;
+        _spellQuickbar.SlotSelected -= _spellSign.Show;
+        _spellQuickbar.SlotDiselected -= _spellSign.Hide;
+
     }
 
-    public void DisableInput()
-    {
-        _castInput.action.Disable();
-        _spellSign.DisableInput();
-    }
 }
 

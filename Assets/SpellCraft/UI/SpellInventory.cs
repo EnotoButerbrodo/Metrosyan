@@ -7,8 +7,8 @@ using UnityEngine.InputSystem;
 
 public class SpellInventory : MonoBehaviour
 {
-    public event Action SpellSelected;
-    public event Action SpelDiselected;
+    public event Action SlotSelected;
+    public event Action SlotDiselected;
 
     public bool IsSpellSelected => _selectedSlot != null;
     public SpellInventorySlot SelectedSlot => _selectedSlot ?? null;
@@ -19,6 +19,11 @@ public class SpellInventory : MonoBehaviour
     [SerializeField] private SpellInventorySlot _selectedSlot;
 
     
+    public void SelectSlot(int index)
+    {
+        _slots[index].Select();
+    }
+
     public void AddSpell(Spell spell, int slotIndex = 0)
     {
         _slots[slotIndex].Slot.Add(spell);
@@ -44,6 +49,8 @@ public class SpellInventory : MonoBehaviour
         {
             _selectedSlot?.Diselect();
             _selectedSlot = slot;
+
+            SlotSelected?.Invoke();
         }
     }
 
@@ -52,6 +59,8 @@ public class SpellInventory : MonoBehaviour
         if(_selectedSlot == slot)
         {
             _selectedSlot = null;
+
+            SlotDiselected?.Invoke();
         }
     }
 }

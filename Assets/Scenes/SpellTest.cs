@@ -25,6 +25,6 @@ public class TestSpell : Spell, IStorable
 
     protected override void OnSpellUse(Ray direction, GameObject target = null)
     {
-        Debug.Log("Cast test spell");
+        Debug.Log($"Cast test spell {direction.origin}");
     }
 }
