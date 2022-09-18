@@ -18,10 +18,15 @@ public class SpellInventory : MonoBehaviour
 
     [SerializeField] private SpellInventorySlot _selectedSlot;
 
-    
+
     public void SelectSlot(int index)
     {
         _slots[index].Select();
+    }
+
+    public void DiselectSlot(int index)
+    {
+        _slots[index].Diselect();
     }
 
     public void AddSpell(Spell spell, int slotIndex = 0)
@@ -51,6 +56,7 @@ public class SpellInventory : MonoBehaviour
             _selectedSlot = slot;
 
             SlotSelected?.Invoke();
+
         }
     }
 

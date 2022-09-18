@@ -86,6 +86,10 @@ public class SpellSight : MonoBehaviour, IInputLisener
         _transform = GetComponent<Transform>();
     }
 
+    private void OnSlotSelected(SpellInventorySlot slot)
+    {
+        Show();
+    }
     private void OnEnable()
     {
         _enabled = true;

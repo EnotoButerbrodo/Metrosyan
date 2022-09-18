@@ -21,7 +21,7 @@ public class TestSpell : Spell, IStorable
     {
     }
     Sprite IStorable.Sprite { get; set; }
-    public override CastType CastType => CastType.Shoot;
+    public override CastType CastType => CastType.Call;
 
     protected override void OnSpellUse(Ray direction, GameObject target = null)
     {

@@ -7,7 +7,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
     public UnityEvent NotEnouthStamina;
     [SerializeField] private SpellSight _spellSign;
     [SerializeField] private InputActionReference _castInput;
-    [SerializeField] private SpellInventory _spellQuickbar;
+    [SerializeField] private SpellInventory _spellInventory;
 
     public void Cast(Timer reloadTimer, Spell spell, Ray direction, GameObject target = null)
     {
@@ -26,16 +26,26 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         _spellSign.DisableInput();
     }
 
+    private void OnSlotSelected(SpellInventorySlot slot)
+    {
+        _spellSign.Show();
+    }
+
+    private void OnSlotDiselected(SpellInventorySlot slot)
+    {
+        _spellSign.Hide();
+    }
+
     private void OnCastPressed(InputAction.CallbackContext context)
     {
 
-        if (_spellQuickbar.SelectedSlot?.Slot.CurrentItem is null)
+        if (_spellInventory.SelectedSlot?.Slot.CurrentItem is null)
         {
             return;
         }
 
-        SpellInventorySlot slot = _spellQuickbar.SelectedSlot;
-        Timer reloadTimer = _spellQuickbar.SelectedSlot.SlotReloadTimer;
+        SpellInventorySlot slot = _spellInventory.SelectedSlot;
+        Timer reloadTimer = _spellInventory.SelectedSlot.SlotReloadTimer;
         Spell spell = slot.Slot.CurrentItem;
 
         switch (spell.CastType)
@@ -54,23 +64,23 @@ public class SpellCaster : MonoBehaviour, IInputLisener
                 break;
         }
 
-        
+        _spellSign.Hide();
     }
 
     private void OnEnable()
     {
         EnableInput();
         _castInput.action.performed += OnCastPressed;
-        _spellQuickbar.SlotSelected += _spellSign.Show;
-        _spellQuickbar.SlotDiselected += _spellSign.Hide;
+        _spellInventory.SlotSelected += _spellSign.Show;
+        _spellInventory.SlotDiselected += _spellSign.Hide;
 
     }
     private void OnDisable()
     {
         DisableInput();
         _castInput.action.performed -= OnCastPressed;
-        _spellQuickbar.SlotSelected -= _spellSign.Show;
-        _spellQuickbar.SlotDiselected -= _spellSign.Hide;
+        _spellInventory.SlotSelected -= _spellSign.Show;
+        _spellInventory.SlotDiselected -= _spellSign.Hide;
 
     }
 

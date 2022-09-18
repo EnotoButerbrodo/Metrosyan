@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class SpellSelector : MonoBehaviour
@@ -8,7 +9,7 @@ public class SpellSelector : MonoBehaviour
     [SerializeField] private InputActionReference _ThirdSlotInput;
     [SerializeField] private InputActionReference _FourSlotInput;
 
-    [SerializeField] private SpellInventory spellInventory;
+    [SerializeField] private SpellInventory _spellInventory;
 
     private void OnEnable()
     {
@@ -43,22 +44,22 @@ public class SpellSelector : MonoBehaviour
 
     private void SelectFirstSlot(InputAction.CallbackContext c)
     {
-        spellInventory.SelectSlot(0);
+        _spellInventory.SelectSlot(0);
     }
 
     private void SelectSecondSlot(InputAction.CallbackContext c)
     {
-        spellInventory.SelectSlot(1);
+        _spellInventory.SelectSlot(1);
     }
 
     private void SelectThirdSlot(InputAction.CallbackContext c)
     {
-        spellInventory.SelectSlot(2);
+        _spellInventory.SelectSlot(2);
     }
 
     private void SelectFourSlot(InputAction.CallbackContext c)
     {
-        spellInventory.SelectSlot(3);
+        _spellInventory.SelectSlot(3);
     }
 }
 

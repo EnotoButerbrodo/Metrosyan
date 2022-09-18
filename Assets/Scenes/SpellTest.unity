@@ -457,7 +457,7 @@ MonoBehaviour:
   _SecondSlotInput: {fileID: 1253616143030700008, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
   _ThirdSlotInput: {fileID: -4888756048540865371, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
   _FourSlotInput: {fileID: -6460853182864040562, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
-  spellInventory: {fileID: 1535567470}
+  _spellInventory: {fileID: 1535567470}
 --- !u!1001 &1535567467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -737,7 +737,7 @@ MonoBehaviour:
       m_Calls: []
   _spellSign: {fileID: 117803820}
   _castInput: {fileID: 2458913617926032314, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
-  _spellQuickbar: {fileID: 1535567470}
+  _spellInventory: {fileID: 1535567470}
 --- !u!4 &1620915850
 Transform:
   m_ObjectHideFlags: 0
