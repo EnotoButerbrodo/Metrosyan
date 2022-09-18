@@ -20,8 +20,10 @@ public class TestSpell : Spell, IStorable
     public TestSpell(float reloadTime) : base(reloadTime)
     {
     }
+
     Sprite IStorable.Sprite { get; set; }
     public override CastType CastType => CastType.Call;
+    public override CastTime CastTime => CastTime.Instantly;
 
     protected override void OnSpellUse(Ray direction, GameObject target = null)
     {

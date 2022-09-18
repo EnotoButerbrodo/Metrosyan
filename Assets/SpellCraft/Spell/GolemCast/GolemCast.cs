@@ -16,6 +16,8 @@ public class GolemCast : Spell
 
     public override CastType CastType => CastType.Call;
 
+    public override CastTime CastTime => CastTime.Delay;
+
     public void Init(Golem prefab, Attack attack, Core core)
     {
         _prefab = prefab;
