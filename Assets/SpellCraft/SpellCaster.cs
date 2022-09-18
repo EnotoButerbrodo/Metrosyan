@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -29,6 +30,29 @@ public class SpellCaster : MonoBehaviour, IInputLisener
 
     private void OnSlotSelected(SpellInventorySlot slot)
     {
+
+        //Смотрим на время каста
+        switch (slot.Slot.CurrentItem.CastTime)
+        {
+            case CastTime.Instantly:
+                //Скастовать заклинание моментально
+                CastHandler();
+                break;
+            case CastTime.Delay:
+                /*
+                 * Активировать таймер. Время задается исходя из заклинания
+                 * После таймера выстрелить по позиции курсора
+                 */
+                //Запустить корутину каста
+                break;
+            case CastTime.Hold:
+                /*
+                 * Активировать прицел
+                 * Ожидать кнопку каста заклинания.
+                 */
+                //Запустить коротину ожидания кнопки?
+                break;
+        }
         _spellSign.Show();
     }
 
@@ -37,14 +61,8 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         _spellSign.Hide();
     }
 
-    private void OnCastPressed(InputAction.CallbackContext context)
+    private void CastHandler()
     {
-
-        if (_spellInventory.SelectedSlot?.Slot.CurrentItem is null)
-        {
-            return;
-        }
-
         SpellInventorySlot slot = _spellInventory.SelectedSlot;
         Timer reloadTimer = _spellInventory.SelectedSlot.SlotReloadTimer;
         Spell spell = slot.Slot.CurrentItem;
@@ -64,17 +82,26 @@ public class SpellCaster : MonoBehaviour, IInputLisener
                 Cast(reloadTimer, spell, new Ray(transform.position, _spellSign.transform.position - transform.position));
                 break;
         }
+        slot.Diselect();
+
+    }
+    private void OnCastPressed(InputAction.CallbackContext context)
+    {
+
+        if (_spellInventory.SelectedSlot?.Slot.CurrentItem is null)
+        {
+            return;
+        }
+
+        CastHandler();
 
         _spellSign.Hide();
-        slot.Diselect();
     }
 
     private void OnEnable()
     {
         EnableInput();
         _castInput.action.performed += OnCastPressed;
-        _spellInventory.SlotSelected += _spellSign.Show;
-        _spellInventory.SlotDiselected += _spellSign.Hide;
         _spellInventory.SelectedSlotReloading += () => { UnityEngine.Debug.Log("Слот перезаряжается"); };
 
     }
@@ -82,10 +109,51 @@ public class SpellCaster : MonoBehaviour, IInputLisener
     {
         DisableInput();
         _castInput.action.performed -= OnCastPressed;
-        _spellInventory.SlotSelected -= _spellSign.Show;
-        _spellInventory.SlotDiselected -= _spellSign.Hide;
 
     }
 
 }
 
+//public interface ICastTimeStraregy
+//{
+//    void Cast(Timer timer, Spell spell);
+//}
+
+//public class InstantCastStrategy : ICastTimeStraregy
+//{
+//    private Vector3 _castPosition;
+//    private Vector3 _spellSightPosition;
+
+//    public InstantCastStrategy(Vector3 castPosition, Vector3 spellSightPosition)
+//    {
+//        _castPosition = castPosition;
+//        _spellSightPosition = spellSightPosition;
+//    }
+
+//    public void Cast(Timer timer, Spell spell)
+//    {
+//        spell.Use(timer, castTypeStrategy.GetDirection(), castTypeStrategy.GetTarget());
+//    }
+//}
+
+//public interface ICastTypeStrategy
+//{
+//    public Ray GetDirection();
+//    public GameObject GetTarget();
+//}
+
+//public class CallCastStrategy : ICastTypeStrategy
+//{
+//    private SpellSight _sight;
+
+//    public CallCastStrategy(SpellSight sight)
+//    {
+//        _sight = sight;
+//    }
+
+//    public Ray GetDirection() =>
+//        new Ray(_sight.Position, Vector3.zero);
+
+
+//    public GameObject GetTarget() => null;
+//}

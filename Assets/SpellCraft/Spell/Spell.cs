@@ -56,3 +56,12 @@ public abstract class Spell : IStorable
     protected abstract void OnSpellUse(Ray direction, GameObject target = null);
 }
 
+public abstract class DelayedSpell : Spell
+{
+    private float _castDelay;
+
+    protected DelayedSpell(float castDelay) : base()
+    {
+        _castDelay = castDelay;
+    }
+}
