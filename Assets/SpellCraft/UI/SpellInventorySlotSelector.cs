@@ -6,6 +6,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(SpellInventorySlotLink))]
 public class SpellInventorySlotSelector : MonoBehaviour
 {
+    [SerializeField] private Image _selectImage;
+
     private SpellInventorySlotLink _link;
 
     private void Awake()
@@ -26,12 +28,12 @@ public class SpellInventorySlotSelector : MonoBehaviour
     }
     public void Select(SpellInventorySlot slot)
     {
-        _link.SelectImage.enabled = true;
+        _selectImage.enabled = true;
     }
 
     public void Diselect(SpellInventorySlot slot)
     {
-        _link.SelectImage.enabled = false;
+        _selectImage.enabled = false;
     }
 
 }

@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
-    public Action Finished;
-
+    public Action<TimerEventArgs> Started;
     public Action<TimerEventArgs> Tick;
+    public Action Finished;
     private bool _stopRequsted;
 
     public bool IsFinished { get; private set; }
@@ -15,6 +15,7 @@ public class Timer : MonoBehaviour
     {
         IsFinished = false;
         StartCoroutine(TimerHandler(time));
+
     }
 
     public void Stop()
@@ -26,6 +27,8 @@ public class Timer : MonoBehaviour
 
     private IEnumerator TimerHandler(float reloadTime)
     {
+        Started?.Invoke(new TimerEventArgs(0, reloadTime));
+
         for (float currentTime = 0; currentTime < reloadTime; currentTime += Time.deltaTime)
         {
             if (_stopRequsted)
