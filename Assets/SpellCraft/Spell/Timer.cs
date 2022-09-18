@@ -3,24 +3,34 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ReloadTimer : MonoBehaviour
+public class Timer : MonoBehaviour
 {
     public Action Finished;
 
-    public Action<ReloadEventArgs> Tick;
-    
+    public Action<TimerEventArgs> Tick;
+    private bool _stopRequsted;
     public bool IsFinished { get; private set; }
-    public void Start(float time)
+    public void StartTimer(float time)
     {
         IsFinished = false;
         StartCoroutine(TimerHandler(time));
+    }
+
+    public void Stop()
+    {
+        _stopRequsted = true;
     }
 
     private IEnumerator TimerHandler(float reloadTime)
     {
         for (float currentTime = 0; currentTime < reloadTime; currentTime += Time.deltaTime)
         {
-            Tick?.Invoke(new ReloadEventArgs(currentTime, reloadTime));
+            if (_stopRequsted)
+            {
+                _stopRequsted = false;
+                break;
+            }
+            Tick?.Invoke(new TimerEventArgs(currentTime, reloadTime));
             yield return null;
         }
 
@@ -29,15 +39,16 @@ public class ReloadTimer : MonoBehaviour
     }
 }
 
-public class ReloadEventArgs
+public class TimerEventArgs
 {
     public float CurrentTime { get; private set; }
     public float MaxTime { get; private set; }
 
-    public ReloadEventArgs(float currentTime, float maxTime)
+    public TimerEventArgs(float currentTime, float maxTime)
     {
         CurrentTime = currentTime;
         MaxTime = maxTime;
     }
 }
+
 

@@ -10,7 +10,6 @@ public class SpellInventory : MonoBehaviour
     public event Action SpellSelected;
     public event Action SpelDiselected;
 
-
     public bool IsSpellSelected => _selectedSlot != null;
     public Spell SelectedSpell => _selectedSlot.Slot.CurrentItem ?? null;
 
@@ -58,8 +57,6 @@ public class SpellInventory : MonoBehaviour
             _selectedSlot = null;
         }
     }
-
-
 }
 
 

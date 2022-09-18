@@ -5,11 +5,11 @@ using UnityEngine;
 public class SpellTest : MonoBehaviour
 {
     [SerializeField] private SpellSlot _slot;
-    [SerializeField] private ReloadTimer _spellReloader;
+    [SerializeField] private Timer _spellReloader;
     private void Awake()
     {
         Spell testSpell = new TestSpell();
-        ReloadingSpell reloadingSpell = new ReloadingSpell(testSpell, 1, _spellReloader);
+        ReloadingSpell reloadingSpell = new ReloadingSpell(testSpell, 1);
         _slot.Add(reloadingSpell);
     }
 }

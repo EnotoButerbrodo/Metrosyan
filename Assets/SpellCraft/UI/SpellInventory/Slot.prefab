@@ -221,8 +221,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4042989620014532635}
   - component: {fileID: 4042989620014532709}
+  - component: {fileID: 1548572773929001796}
   - component: {fileID: 4042989620014532711}
   - component: {fileID: 4042989620014532708}
+  - component: {fileID: 7752050629580957584}
+  - component: {fileID: 2293189910299869854}
   m_Layer: 0
   m_Name: Slot
   m_TagString: Untagged
@@ -263,6 +266,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8631ce7e575c89d4ebe2c2a17ffb6aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1548572773929001796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042989620014532632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469220f0a6a56c3489a3f923afd755a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spellSlot: {fileID: 4042989620014532709}
+  _spellInventorySlot: {fileID: 4042989620014532711}
+  _selectImage: {fileID: 5265878209253795855}
+  _reloadImage: {fileID: 2558271091762119796}
+  _reloadTimer: {fileID: 2293189910299869854}
+  _inputAction: {fileID: 2640634930436991122, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
 --- !u!114 &4042989620014532711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156cf9cefa032b547b18bca0ba78311e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slot: {fileID: 4042989620014532709}
   _input: {fileID: 2640634930436991122, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
 --- !u!114 &4042989620014532708
 MonoBehaviour:
@@ -289,8 +309,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0316092e0e6f94b81e807054cf405b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7752050629580957584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042989620014532632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc3467b2bf1a3046800e32e6f91b493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _slot: {fileID: 4042989620014532711}
-  _selectImage: {fileID: 5265878209253795855}
+  _reloadImage: {fileID: 2558271091762119796}
+  _reloadTimer: {fileID: 2293189910299869854}
+--- !u!114 &2293189910299869854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4042989620014532632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859c580314b91c84c827560f40f620ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4042989621237825300
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,50 +1,32 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
-
 public class ReloadingSpell : Spell
 {
-    public Action SpellReloading;
-    protected float _reloadTime;
-    
+    public override CastType CastType => _spell.CastType;
+
+    public bool Reloading => _reloading;
+
     private Spell _spell;
-
-    private bool _reloaded = true;
-
-    private ReloadTimer _reloader;
-    public ReloadingSpell(Spell spell, float reloadTime, ReloadTimer reloader)
+    private float _reloadTime;
+    private bool _reloading;
+    public ReloadingSpell(Spell spell, float reloadTime)
     {
         _spell = spell;
         _reloadTime = reloadTime;
-        _reloader = reloader;
-
-        _reloader.Finished += OnSpellReloaded;
     }
-
-    ~ReloadingSpell()
+    public void Reload()
     {
-        _reloader.Finished -= OnSpellReloaded;
+        _reloading = true;
     }
-
-    public override CastType CastType => _spell.CastType;
-
     public override void Use(Ray direction, GameObject target = null)
     {
-        if (_reloaded)
+        if (_reloading)
         {
-            _reloaded = false;
-            _spell.Use(direction, target);
-            _reloader.Start(_reloadTime);
+            return;
         }
-        else
-        {
-            SpellReloading?.Invoke();
-        }
+
+        _spell.Use(direction, target);
+        _reloading = true;
     }
-    
-    private void OnSpellReloaded()
-    {
-        _reloaded = true;
-    }
-    
+
 }
