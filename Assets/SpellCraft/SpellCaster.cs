@@ -8,7 +8,6 @@ public class SpellCaster : MonoBehaviour, IInputLisener
     [SerializeField] private SpellSight _spellSign;
     [SerializeField] private InputActionReference _castInput;
     [SerializeField] private SpellInventory _spellQuickbar;
-    [SerializeField] private Stamina _stamina;
 
     public void Cast(Timer reloadTimer, Spell spell, Ray direction, GameObject target = null)
     {

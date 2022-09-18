@@ -21,7 +21,7 @@ public class CoreMenuItem : SelectableItem<Core>
         if (_item is null)
             return;
 
-        _image.sprite = _item.Sprite;
+        _image.sprite = null;
     }
 
 #if UNITY_EDITOR
@@ -31,7 +31,7 @@ public class CoreMenuItem : SelectableItem<Core>
         if (_item is null)
             return;
 
-        _image.sprite = _item.Sprite;
+        _image.sprite = null;
     }
 #endif
 }

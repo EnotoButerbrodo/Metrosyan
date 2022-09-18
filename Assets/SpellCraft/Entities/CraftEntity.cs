@@ -8,5 +8,15 @@ public abstract class CraftEntity : ScriptableObject, IStorable
 
     public Color Color => _color;
     public EntityStats Stats => _stats;
-    public Sprite Sprite => _sprite;
+    Sprite IStorable.Sprite
+    {
+        get
+        {
+            return _sprite;
+        }
+        set
+        {
+            _sprite = value;
+        }
+    }
 }

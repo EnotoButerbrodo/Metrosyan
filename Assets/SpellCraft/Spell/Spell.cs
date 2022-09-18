@@ -13,9 +13,10 @@ public abstract class Spell : IStorable
     public bool Reloading => _reloading;
     public float ReloadTime => _reloadTime;
 
+    Sprite IStorable.Sprite { get; set; }
+
     private float _reloadTime;
     private bool _reloading;
-    public Sprite Sprite => null;
 
     public Spell(float reloadTime)
     {

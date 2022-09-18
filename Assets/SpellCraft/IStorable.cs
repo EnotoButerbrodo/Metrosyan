@@ -3,6 +3,6 @@ using UnityEngine;
 
 public interface IStorable
 {
-    public Sprite Sprite { get; }
+    public Sprite Sprite { get; set; }
 }
 

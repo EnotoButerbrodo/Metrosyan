@@ -15,12 +15,12 @@ public class SpellTest : MonoBehaviour
     }
 }
 
-public class TestSpell : Spell
+public class TestSpell : Spell, IStorable
 {
     public TestSpell(float reloadTime) : base(reloadTime)
     {
     }
-
+    Sprite IStorable.Sprite { get; set; }
     public override CastType CastType => CastType.Shoot;
 
     protected override void OnSpellUse(Ray direction, GameObject target = null)
