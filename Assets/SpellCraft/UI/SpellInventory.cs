@@ -35,6 +35,11 @@ public class SpellInventory : MonoBehaviour
     {
         _slots[index].Diselect();
     }
+    
+    public void ClearSelection()
+    {
+        _selectedSlot?.Diselect();
+    }
 
     public void AddSpell(Spell spell, int slotIndex = 0)
     {
@@ -54,17 +59,15 @@ public class SpellInventory : MonoBehaviour
     {
         if(_selectedSlot == slot)
         {
-            _selectedSlot?.Diselect();
-            _selectedSlot = null;
+            return;
         }
-        else
-        {
-            _selectedSlot?.Diselect();
-            _selectedSlot = slot;
+        
+        _selectedSlot?.Diselect();
+        _selectedSlot = slot;
 
-            SlotSelected?.Invoke();
+        SlotSelected?.Invoke();
 
-        }
+        
     }
 
     private void OnSlotDiselected(SpellInventorySlot slot)

@@ -8,6 +8,7 @@ public class SpellSelector : MonoBehaviour
     [SerializeField] private InputActionReference _SecondSlotInput;
     [SerializeField] private InputActionReference _ThirdSlotInput;
     [SerializeField] private InputActionReference _FourSlotInput;
+    [SerializeField] private InputActionReference _CancelInput;
 
     [SerializeField] private SpellInventory _spellInventory;
 
@@ -24,6 +25,9 @@ public class SpellSelector : MonoBehaviour
 
         _FourSlotInput.action.Enable();
         _FourSlotInput.action.performed += SelectFourSlot;
+
+        _CancelInput.action.Enable();
+        _CancelInput.action.performed += OnCancelButton;
     }
 
     private void OnDisable()
@@ -40,6 +44,9 @@ public class SpellSelector : MonoBehaviour
 
         _FourSlotInput.action.Disable();
         _FourSlotInput.action.performed -= SelectFourSlot;
+
+        _CancelInput.action.Disable();
+        _CancelInput.action.performed -= OnCancelButton;
     }
 
     private void SelectFirstSlot(InputAction.CallbackContext c)
@@ -60,6 +67,11 @@ public class SpellSelector : MonoBehaviour
     private void SelectFourSlot(InputAction.CallbackContext c)
     {
         _spellInventory.SelectSlot(3);
+    }
+
+    private void OnCancelButton(InputAction.CallbackContext c)
+    {
+        _spellInventory.ClearSelection();
     }
 }
 
