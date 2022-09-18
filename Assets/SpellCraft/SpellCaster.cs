@@ -10,9 +10,9 @@ public class SpellCaster : MonoBehaviour, IInputLisener
     [SerializeField] private SpellInventory _spellQuickbar;
     [SerializeField] private Stamina _stamina;
 
-    public void Cast(Spell spell, Ray direction, GameObject target = null)
+    public void Cast(Timer reloadTimer, Spell spell, Ray direction, GameObject target = null)
     {
-        spell.Use(direction, target);
+        spell.Use(reloadTimer, direction, target);
     }
 
     private void Awake()
@@ -42,26 +42,28 @@ public class SpellCaster : MonoBehaviour, IInputLisener
     private void OnCastPressed(InputAction.CallbackContext context)
     {
 
-        if (_spellQuickbar.SelectedSpell is null)
+        if (_spellQuickbar.SelectedSlot?.Slot.CurrentItem is null)
         {
             return;
         }
 
-        var spell = _spellQuickbar.SelectedSpell;
+        SpellInventorySlot slot = _spellQuickbar.SelectedSlot;
+        Timer reloadTimer = _spellQuickbar.SelectedSlot.SlotTimer;
+        Spell spell = slot.Slot.CurrentItem;
 
         switch (spell.CastType)
         {
             case CastType.Call:
-                Cast(spell, new Ray(_spellSign.Position, Vector3.zero));
+                Cast(reloadTimer, spell, new Ray(_spellSign.Position, Vector3.zero));
                 break;
             case CastType.Shoot:
-                Cast(spell, new Ray(transform.position, _spellSign.transform.position - transform.position));
+                Cast(reloadTimer, spell, new Ray(transform.position, _spellSign.transform.position - transform.position));
                 break;
             case CastType.Target:
-                Cast(spell, new Ray(transform.position, Vector3.zero), gameObject);
+                Cast(reloadTimer, spell, new Ray(transform.position, Vector3.zero), gameObject);
                 break;
             default:
-                Cast(spell, new Ray(transform.position, _spellSign.transform.position - transform.position));
+                Cast(reloadTimer, spell, new Ray(transform.position, _spellSign.transform.position - transform.position));
                 break;
         }
 

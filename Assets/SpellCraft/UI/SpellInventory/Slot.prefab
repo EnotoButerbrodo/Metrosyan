@@ -296,7 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 156cf9cefa032b547b18bca0ba78311e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _input: {fileID: 2640634930436991122, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
 --- !u!114 &4042989620014532708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,9 +320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc3467b2bf1a3046800e32e6f91b493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _slot: {fileID: 4042989620014532711}
-  _reloadImage: {fileID: 2558271091762119796}
-  _reloadTimer: {fileID: 2293189910299869854}
 --- !u!114 &2293189910299869854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,7 +519,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 0
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7779363276761414437

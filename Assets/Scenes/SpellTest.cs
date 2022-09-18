@@ -7,8 +7,11 @@ public class SpellTest : MonoBehaviour
     [SerializeField] private SpellInventory _inventory;
     private void Awake()
     {
-        Spell testSpell = new TestSpell(1);
-        _inventory.AddSpell(testSpell);
+        for(int i = 0; i< _inventory.SlotsCount; i++)
+        {
+            Spell testSpell = new TestSpell(i + 1);
+            _inventory.AddSpell(testSpell, i);
+        }
     }
 }
 

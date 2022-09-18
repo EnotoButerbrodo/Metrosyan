@@ -9,6 +9,8 @@ public class SpellInventorySlot : MonoBehaviour
     
     public Action<SpellInventorySlot> Selected;
     public Action<SpellInventorySlot> Diselected;
+
+    public Timer SlotTimer => _link.ReloadTimer;
     public SpellSlot Slot => _link.SpellSlot;
     public Timer SlotReloadTimer => _link.ReloadTimer;
     public bool IsSelected { get; private set; }

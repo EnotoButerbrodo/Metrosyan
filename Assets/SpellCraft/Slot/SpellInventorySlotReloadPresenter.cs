@@ -24,7 +24,7 @@ public class SpellInventorySlotReloadPresenter : MonoBehaviour
 
     private void OnTick(TimerEventArgs e)
     {
-        _link.ReloadImage.fillAmount = 1 - ( e.MaxTime / e.CurrentTime);
+        _link.ReloadImage.fillAmount = 1f - ( e.CurrentTime / e.MaxTime);
     }
 
     private void OnTimerFinish()

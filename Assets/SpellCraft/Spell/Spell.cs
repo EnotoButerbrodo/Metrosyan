@@ -21,11 +21,11 @@ public abstract class Spell : IStorable
     {
         _reloadTime = reloadTime;
     }
-    public void Reload()
+    private void Reload()
     {
-        _reloading = true;
+        _reloading = false;
     }
-    public void Use(Ray direction, GameObject target = null)
+    public void Use(Timer reloadTimer, Ray direction, GameObject target = null)
     {
         if (_reloading)
         {
@@ -33,7 +33,12 @@ public abstract class Spell : IStorable
         }
         OnSpellUse(direction, target);
         _reloading = true;
+
+        reloadTimer.Finished += Reload;
+        reloadTimer.StartTimer(_reloadTime);
     }
+
+    
 
     protected abstract void OnSpellUse(Ray direction, GameObject target = null);
 }

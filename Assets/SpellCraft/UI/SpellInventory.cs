@@ -11,20 +11,17 @@ public class SpellInventory : MonoBehaviour
     public event Action SpelDiselected;
 
     public bool IsSpellSelected => _selectedSlot != null;
-    public Spell SelectedSpell => _selectedSlot.Slot.CurrentItem ?? null;
+    public SpellInventorySlot SelectedSlot => _selectedSlot ?? null;
 
+    public int SlotsCount => _slots.Count;
     [SerializeField] private List<SpellInventorySlot> _slots;
 
     [SerializeField] private SpellInventorySlot _selectedSlot;
 
     
-    public void AddSpell(Spell spell)
+    public void AddSpell(Spell spell, int slotIndex = 0)
     {
-        if(_selectedSlot is null)
-        {
-            _selectedSlot = _slots[0];
-        }
-        _selectedSlot.Slot.Add(spell);
+        _slots[slotIndex].Slot.Add(spell);
     }
 
     private void Awake()
