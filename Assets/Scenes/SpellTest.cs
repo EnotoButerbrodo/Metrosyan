@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class SpellTest : MonoBehaviour
 {
-    [SerializeField] private SpellSlot _slot;
-    [SerializeField] private Timer _spellReloader;
+    [SerializeField] private SpellInventory _inventory;
     private void Awake()
     {
-        Spell testSpell = new TestSpell();
-        ReloadingSpell reloadingSpell = new ReloadingSpell(testSpell, 1);
-        _slot.Add(reloadingSpell);
+        Spell testSpell = new TestSpell(1);
+        _inventory.AddSpell(testSpell);
     }
 }
 
 public class TestSpell : Spell
 {
+    public TestSpell(float reloadTime) : base(reloadTime)
+    {
+    }
+
     public override CastType CastType => CastType.Shoot;
 
-    public override void Use(Ray direction, GameObject target = null)
+    protected override void OnSpellUse(Ray direction, GameObject target = null)
     {
-        Debug.Log("Test shoot");
+        Debug.Log("Cast test spell");
     }
 }

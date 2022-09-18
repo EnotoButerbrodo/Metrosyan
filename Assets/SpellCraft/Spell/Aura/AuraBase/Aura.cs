@@ -11,6 +11,10 @@ public class Aura : Spell
 
     private Attack _auraAttack;
 
+    public Aura(float reloadTime) : base(reloadTime)
+    {
+    }
+
     public override CastType CastType => CastType.Target;
 
     public void Init(Attack auraAttack, AuraConfig auraConfig)
@@ -19,7 +23,7 @@ public class Aura : Spell
         _auraConfig = auraConfig;
     } 
 
-    public override void Use(Ray direction, GameObject target)
+    protected override void OnSpellUse(Ray direction, GameObject target)
     {
         var auraEffect = target.AddComponent<AuraEffect>();
         auraEffect.Init(_auraAttack, _auraConfig);

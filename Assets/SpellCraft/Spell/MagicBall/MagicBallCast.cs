@@ -7,6 +7,10 @@ public class MagicBallCast : Spell
     private MagicBall _ballPrevab;
     private int _damage;
 
+    public MagicBallCast(float reloadTime) : base(reloadTime)
+    {
+    }
+
     public override CastType CastType => CastType.Shoot;
 
     public void Init(MagicBall magicBall, int damage, Core core)
@@ -15,7 +19,7 @@ public class MagicBallCast : Spell
         _damage = damage;
     }
 
-    public override void Use(Ray direction, GameObject target = null)
+    protected override void OnSpellUse(Ray direction, GameObject target = null)
     {
         var ball = GameObject.Instantiate(_ballPrevab, direction.origin + new Vector3(0, 1f), Quaternion.Euler(direction.direction));
         ball.Init(_damage);

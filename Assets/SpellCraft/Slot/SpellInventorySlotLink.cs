@@ -10,6 +10,7 @@ public class SpellInventorySlotLink : MonoBehaviour
     public Image ReloadImage => _reloadImage;
     public Timer ReloadTimer => _reloadTimer;
     public InputActionReference InputAction => _inputAction;
+    public SpellShooter SpellShooter => _spellShooter;
 
     [SerializeField] private SpellSlot _spellSlot;
     [SerializeField] private SpellInventorySlot _spellInventorySlot;
@@ -17,5 +18,6 @@ public class SpellInventorySlotLink : MonoBehaviour
     [SerializeField] private Image _reloadImage;
     [SerializeField] private Timer _reloadTimer;
     [SerializeField] private InputActionReference _inputAction;
+    [SerializeField] private SpellShooter _spellShooter;
 
 }

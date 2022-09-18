@@ -8,7 +8,7 @@ public class MagicBallCastFactory : SpellFactory
 
     public override Spell Get(Core core)
     {
-        MagicBallCast spell = new MagicBallCast();
+        MagicBallCast spell = new MagicBallCast(1);
         MagicBall magicBall = _prefabs.GetPrefab(core);
 
         spell.Init(magicBall, Convert.ToInt32(core.Stats.Damage), core);

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 [RequireComponent(typeof(SpellInventorySlotLink))]
-public class SpellInventorySlotReloadHandler : MonoBehaviour
+public class SpellInventorySlotReloadPresenter : MonoBehaviour
 {
     private SpellInventorySlotLink _link;
 

@@ -12,20 +12,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
 
     public void Cast(Spell spell, Ray direction, GameObject target = null)
     {
-        float neededStamina = 1;
-        if (spell is GolemCast)
-        {
-            neededStamina = _stamina.MaxStamina;
-        }
-
-        if (_stamina.TrySpend(neededStamina))
-        {
-            spell.Use(direction, target);
-        }
-        else
-        {
-            NotEnouthStamina?.Invoke();
-        }
+        spell.Use(direction, target);
     }
 
     private void Awake()
