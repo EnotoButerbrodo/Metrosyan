@@ -13,6 +13,7 @@ public class SpellInventorySlot : MonoBehaviour
     public SpellSlot Slot => _link.SpellSlot;
     public Timer SlotReloadTimer => _link.ReloadTimer;
     public bool IsSelected { get; private set; }
+    public bool IsReloading => Slot?.CurrentItem?.Reloading is null ? false : Slot.CurrentItem.Reloading;
 
     private SpellInventorySlotLink _link;
 

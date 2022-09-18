@@ -10,6 +10,7 @@ public class SpellInventory : MonoBehaviour
     public event Action SlotSelected;
     public event Action SlotDiselected;
 
+    public event Action SelectedSlotReloading;
     public bool IsSpellSelected => _selectedSlot != null;
     public SpellInventorySlot SelectedSlot => _selectedSlot ?? null;
 
@@ -21,6 +22,12 @@ public class SpellInventory : MonoBehaviour
 
     public void SelectSlot(int index)
     {
+        if (_slots[index].IsReloading)
+        {
+            SelectedSlotReloading?.Invoke();
+            return;
+        }
+
         _slots[index].Select();
     }
 

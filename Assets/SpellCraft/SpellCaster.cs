@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -65,6 +66,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         }
 
         _spellSign.Hide();
+        slot.Diselect();
     }
 
     private void OnEnable()
@@ -73,6 +75,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         _castInput.action.performed += OnCastPressed;
         _spellInventory.SlotSelected += _spellSign.Show;
         _spellInventory.SlotDiselected += _spellSign.Hide;
+        _spellInventory.SelectedSlotReloading += () => { UnityEngine.Debug.Log("Слот перезаряжается"); };
 
     }
     private void OnDisable()
