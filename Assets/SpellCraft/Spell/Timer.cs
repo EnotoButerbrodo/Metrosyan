@@ -9,6 +9,7 @@ public class Timer : MonoBehaviour
 
     public Action<TimerEventArgs> Tick;
     private bool _stopRequsted;
+
     public bool IsFinished { get; private set; }
     public void StartTimer(float time)
     {
@@ -19,7 +20,9 @@ public class Timer : MonoBehaviour
     public void Stop()
     {
         _stopRequsted = true;
+        Finished?.Invoke();
     }
+
 
     private IEnumerator TimerHandler(float reloadTime)
     {
