@@ -443,7 +443,6 @@ MonoBehaviour:
   _spellSlot: {fileID: 4042989620014532709}
   _spellInventorySlot: {fileID: 4042989620014532711}
   _reloadTimer: {fileID: 2293189910299869854}
-  _inputAction: {fileID: 2640634930436991122, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
 --- !u!114 &4042989620014532709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,7 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6313726}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.3529412}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

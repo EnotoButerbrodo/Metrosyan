@@ -32,7 +32,8 @@ public class SpellInventorySlotReloadPresenter : MonoBehaviour
     private void OnTimerStart(TimerEventArgs e)
     {
         _timerText.enabled = true;
-        _timerText.text = (e.MaxTime).ToString(_timerFormat, System.Globalization.CultureInfo.InvariantCulture);
+
+        SetTimerTime(e.MaxTime);
 
         _reloadImage.enabled = true;
     }
@@ -41,7 +42,15 @@ public class SpellInventorySlotReloadPresenter : MonoBehaviour
     {
         _reloadImage.fillAmount = 1f - ( e.CurrentTime / e.MaxTime);
 
-        _timerText.text = (e.MaxTime - e.CurrentTime).ToString(_timerFormat, System.Globalization.CultureInfo.InvariantCulture);
+        float reloadPercent = e.MaxTime - e.CurrentTime;
+        SetTimerTime(reloadPercent);
+    }
+
+    private void SetTimerTime(float time)
+    {
+        string format = time > 1f ? "0" : _timerFormat;
+
+        _timerText.text = (time).ToString(format, System.Globalization.CultureInfo.InvariantCulture);
     }
 
     private void OnTimerFinish()
