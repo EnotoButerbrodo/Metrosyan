@@ -67,7 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reloadImage: {fileID: 2558271091762119796}
   _timerText: {fileID: 296953097921509957}
-  _timerFormat: 0.00
+  _timerFormat: 0.0
   _reloadTimer: {fileID: 1311594168817534042}
   _reversed: 0
 --- !u!1 &2414164492516692113
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reloadImage: {fileID: 7071326387170895549}
   _timerText: {fileID: 9053939334332832276}
-  _timerFormat: 0.00
+  _timerFormat: 0.0
   _reloadTimer: {fileID: 8169327876910539744}
   _reversed: 1
 --- !u!1 &4026969842330268906

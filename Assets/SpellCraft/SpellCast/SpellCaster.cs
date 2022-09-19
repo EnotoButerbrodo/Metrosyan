@@ -79,9 +79,6 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         _castInitialHadler.InitialCast();
 
     }
-
-
-
     private void OnEnable()
     {
         EnableInput();
