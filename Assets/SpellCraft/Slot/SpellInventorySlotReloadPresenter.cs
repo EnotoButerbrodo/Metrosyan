@@ -1,50 +1,59 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(SpellInventorySlotLink))]
 public class SpellInventorySlotReloadPresenter : MonoBehaviour
 {
     [SerializeField] private Image _reloadImage;
     [SerializeField] private TextMeshProUGUI _timerText;
     [SerializeField] private string _timerFormat = "0.00";
+    [SerializeField] private Timer _reloadTimer;
 
-    private SpellInventorySlotLink _link;
+    [SerializeField] private bool _reversed;
+
+    private Func<TimerEventArgs, float> _getFillAmount;
+
 
     private void Awake()
     {
-        _link = GetComponent<SpellInventorySlotLink>();
+        _getFillAmount = _reversed ? GetReversedFillAmount : GetFillAmount;
     }
     private void OnEnable()
     {
-        _link.ReloadTimer.Started += OnTimerStart;
-        _link.ReloadTimer.Tick += OnTick;
-        _link.ReloadTimer.Finished += OnTimerFinish;
+        _reloadTimer.Started += OnTimerStart;
+        _reloadTimer.Tick += OnTick;
+        _reloadTimer.Finished += OnTimerFinish;
     }
 
     private void OnDisable()
     {
-        _link.ReloadTimer.Started += OnTimerStart;
-        _link.ReloadTimer.Tick -= OnTick;
-        _link.ReloadTimer.Finished -= OnTimerFinish;
+        _reloadTimer.Started += OnTimerStart;
+        _reloadTimer.Tick -= OnTick;
+        _reloadTimer.Finished -= OnTimerFinish;
     }
 
     private void OnTimerStart(TimerEventArgs e)
     {
         _timerText.enabled = true;
-
         SetTimerTime(e.MaxTime);
-
         _reloadImage.enabled = true;
     }
 
     private void OnTick(TimerEventArgs e)
     {
-        _reloadImage.fillAmount = 1f - ( e.CurrentTime / e.MaxTime);
+        _reloadImage.fillAmount = _getFillAmount(e);
 
         float reloadPercent = e.MaxTime - e.CurrentTime;
         SetTimerTime(reloadPercent);
     }
+
+    private float GetFillAmount(TimerEventArgs e)
+        => 1f - (e.CurrentTime / e.MaxTime);
+
+    private float GetReversedFillAmount(TimerEventArgs e)
+        => e.CurrentTime / e.MaxTime;
+
 
     private void SetTimerTime(float time)
     {

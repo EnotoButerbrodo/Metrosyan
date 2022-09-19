@@ -10,11 +10,14 @@ public class SpellInventorySlotLink : MonoBehaviour
 
     public Timer ReloadTimer => _reloadTimer;
 
+    public Timer CastTimer => _castTimer;
+
     [Header("InventoryHandler")]
     [SerializeField] private SpellSlot _spellSlot;
     [SerializeField] private SpellInventorySlot _spellInventorySlot;
 
     [Header("ReloadHandler")]
     [SerializeField] private Timer _reloadTimer;
+    [SerializeField] private Timer _castTimer;
 
 }

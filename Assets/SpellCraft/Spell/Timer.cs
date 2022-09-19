@@ -5,16 +5,23 @@ using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
+    [SerializeField] private bool _reversed;
     public Action<TimerEventArgs> Started;
     public Action<TimerEventArgs> Tick;
     public Action Finished;
     private bool _stopRequsted;
 
+    private Func<float, IEnumerator> _timerHandler;
+
+    private void Awake()
+    {
+        _timerHandler = _reversed ? ReverseTimerHandler : TimerHandler;
+    }
     public bool IsStarted { get; private set; }
     public void StartTimer(float time)
     {
         IsStarted = true;
-        StartCoroutine(TimerHandler(time));
+        StartCoroutine(_timerHandler(time));
 
     }
 
@@ -25,18 +32,38 @@ public class Timer : MonoBehaviour
     }
 
 
-    private IEnumerator TimerHandler(float reloadTime)
+    private IEnumerator TimerHandler(float time)
     {
-        Started?.Invoke(new TimerEventArgs(0, reloadTime));
+        Started?.Invoke(new TimerEventArgs(0, time));
 
-        for (float currentTime = 0; currentTime < reloadTime; currentTime += Time.deltaTime)
+        for (float currentTime = 0; currentTime < time; currentTime += Time.deltaTime)
         {
             if (_stopRequsted)
             {
                 _stopRequsted = false;
                 break;
             }
-            Tick?.Invoke(new TimerEventArgs(currentTime, reloadTime));
+            Tick?.Invoke(new TimerEventArgs(currentTime, time));
+            yield return null;
+        }
+
+        IsStarted = false;
+        Finished?.Invoke();
+    }
+
+    private IEnumerator ReverseTimerHandler(float time)
+    {
+        Started?.Invoke(new TimerEventArgs(0, time));
+
+        for (float currentTime = time; currentTime > 0; currentTime -= Time.deltaTime)
+        {
+            if (_stopRequsted)
+            {
+                _stopRequsted = false;
+                break;
+            }
+
+            Tick?.Invoke(new TimerEventArgs(currentTime, time));
             yield return null;
         }
 

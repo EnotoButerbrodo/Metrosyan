@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SpellSelector : MonoBehaviour
+public class SpellSelector : MonoBehaviour, IInputLisener
 {
     [SerializeField] private InputActionReference _FirstSlotInput;
     [SerializeField] private InputActionReference _SecondSlotInput;
@@ -12,7 +12,7 @@ public class SpellSelector : MonoBehaviour
 
     [SerializeField] private SpellInventory _spellInventory;
 
-    private void OnEnable()
+    public void EnableInput()
     {
         _FirstSlotInput.action.Enable();
         _FirstSlotInput.action.performed += SelectFirstSlot;
@@ -30,9 +30,8 @@ public class SpellSelector : MonoBehaviour
         _CancelInput.action.performed += OnCancelButton;
     }
 
-    private void OnDisable()
+    public void DisableInput()
     {
-
         _FirstSlotInput.action.Disable();
         _FirstSlotInput.action.performed -= SelectFirstSlot;
 
@@ -47,6 +46,16 @@ public class SpellSelector : MonoBehaviour
 
         _CancelInput.action.Disable();
         _CancelInput.action.performed -= OnCancelButton;
+    }
+
+    private void OnEnable()
+    {
+        EnableInput();    
+    }
+
+    private void OnDisable()
+    {
+        DisableInput();
     }
 
     private void SelectFirstSlot(InputAction.CallbackContext c)
@@ -73,5 +82,7 @@ public class SpellSelector : MonoBehaviour
     {
         _spellInventory.ClearSelection();
     }
+
+
 }
 

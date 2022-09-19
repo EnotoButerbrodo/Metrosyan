@@ -11,7 +11,8 @@ public class SpellInventorySlot : MonoBehaviour
     public Action<SpellInventorySlot> Diselected;
 
     public SpellSlot Slot => _link.SpellSlot;
-    public Timer SlotReloadTimer => _link.ReloadTimer;
+    public Timer ReloadTimer => _link.ReloadTimer;
+    public Timer CastTimer => _link.CastTimer;
     public bool IsSelected { get; private set; }
     public bool IsReloading => Slot?.CurrentItem?.Reloading is null ? false : Slot.CurrentItem.Reloading;
 

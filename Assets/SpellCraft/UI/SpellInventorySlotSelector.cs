@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SpellInventorySlotSelector : MonoBehaviour
 {
     [SerializeField] private Image _selectImage;
+    [SerializeField] private bool _reversed;
 
     private SpellInventorySlotLink _link;
 

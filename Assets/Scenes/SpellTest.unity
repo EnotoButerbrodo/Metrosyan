@@ -835,6 +835,7 @@ MonoBehaviour:
   _spellSign: {fileID: 117803820}
   _castInput: {fileID: 2458913617926032314, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
   _spellInventory: {fileID: 1535567470}
+  _spellSelector: {fileID: 1147598990}
 --- !u!4 &1620915850
 Transform:
   m_ObjectHideFlags: 0
@@ -862,6 +863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859c580314b91c84c827560f40f620ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _reversed: 0
 --- !u!114 &1620915852
 MonoBehaviour:
   m_ObjectHideFlags: 0
