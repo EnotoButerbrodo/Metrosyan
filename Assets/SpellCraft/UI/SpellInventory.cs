@@ -9,7 +9,6 @@ public class SpellInventory : MonoBehaviour
 {
     public event Action<SpellInventorySlot> SlotSelected;
     public event Action<SpellInventorySlot> SlotDiselected;
-
     
 
     public event Action SelectedSlotReloading;

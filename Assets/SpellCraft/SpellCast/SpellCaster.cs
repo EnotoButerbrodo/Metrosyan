@@ -22,34 +22,37 @@ public class SpellCaster : MonoBehaviour, IInputLisener
             _ => new InstantCastInitial(),
         };
 
-    public void Cast(Timer reloadTimer, Spell spell, Ray direction, GameObject target = null)
-    {
-        spell.Use(reloadTimer, direction, target);
-    }
+    private Ray GetCastRay(CastType type)
+       => type switch
+       {
+           CastType.Call => new Ray(_spellSign.Position, Vector3.zero),
+           CastType.Shoot => new Ray(transform.position, _spellSign.transform.position - transform.position),
+           CastType.Target => new Ray(transform.position, Vector3.zero),
+           _ => new Ray(transform.position, Vector3.zero),
+       };
 
-    private void CastHandler()
+    private GameObject GetCastTarget(CastType type)
+        => type switch
+        {
+            CastType.Target => gameObject,
+            _ => null,
+        };
+
+
+    private void CastSpell()
     {
+        _spellSelector.DisableInput();
+
         SpellInventorySlot slot = _spellInventory.SelectedSlot;
         Timer reloadTimer = _spellInventory.SelectedSlot.ReloadTimer;
         Spell spell = slot.Slot.CurrentItem;
+        CastType castType = spell.CastType;
 
-        switch (spell.CastType)
-        {
-            case CastType.Call:
-                Cast(reloadTimer, spell, new Ray(_spellSign.Position, Vector3.zero));
-                break;
-            case CastType.Shoot:
-                Cast(reloadTimer, spell, new Ray(transform.position, _spellSign.transform.position - transform.position));
-                break;
-            case CastType.Target:
-                Cast(reloadTimer, spell, new Ray(transform.position, Vector3.zero), gameObject);
-                break;
-            default:
-                Cast(reloadTimer, spell, new Ray(transform.position, _spellSign.transform.position - transform.position));
-                break;
-        }
+        spell.Use(reloadTimer, GetCastRay(castType), GetCastTarget(castType));
+
         slot.Diselect();
         _spellSign.Hide();
+        _spellSelector.EnableInput();
     }
 
     public void EnableInput()
@@ -61,7 +64,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
     public void DisableInput()
     {
         _castInput.action.Disable();
-        _spellSign.DisableInput(); 
+        _spellSign.DisableInput();
     }
 
     private void OnSlotSelected(SpellInventorySlot slot)
@@ -72,42 +75,13 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         }
 
         _castInitialHadler = GetInitHandler(slot);
-        _castInitialHadler.Initialized += () =>
-        {
-            CastHandler();
-            _spellSelector.EnableInput();
-        };
+        _castInitialHadler.Initialized += CastSpell;
 
-        _spellSelector.DisableInput();
         _castInitialHadler.InitialCast();
-  
 
     }
 
-    //private void CastHandler()
-    //{
-    //    SpellInventorySlot slot = _spellInventory.SelectedSlot;
-    //    Timer reloadTimer = _spellInventory.SelectedSlot.SlotReloadTimer;
-    //    Spell spell = slot.Slot.CurrentItem;
-    //    
-    //    switch (spell.CastType)
-    //    {
-    //        case CastType.Call:
-    //            Cast(reloadTimer, spell, new Ray(_spellSign.Position, Vector3.zero));
-    //            break;
-    //        case CastType.Shoot:
-    //            Cast(reloadTimer, spell, new Ray(transform.position, _spellSign.transform.position - transform.position));
-    //            break;
-    //        case CastType.Target:
-    //            Cast(reloadTimer, spell, new Ray(transform.position, Vector3.zero), gameObject);
-    //            break;
-    //        default:
-    //            Cast(reloadTimer, spell, new Ray(transform.position, _spellSign.transform.position - transform.position));
-    //            break;
-    //    }
-    //    slot.Diselect();
-    //    
-    //}
+
 
     private void OnEnable()
     {
