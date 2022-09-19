@@ -10,7 +10,7 @@ public class SpellTest : MonoBehaviour
         _inventory.AddSpell(new TestSpell(1), 0);
         _inventory.AddSpell(new TestHoldSpell(3), 1);
         _inventory.AddSpell(new TestDelaySpell(5), 2);
-        _inventory.AddSpell(new TestHoldSpell(10), 3);
+        _inventory.AddSpell(new Beam(3, 10, 10, 10), 3);
     }
 }
 
