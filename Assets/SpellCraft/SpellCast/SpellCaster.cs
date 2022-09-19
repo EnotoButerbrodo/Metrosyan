@@ -20,6 +20,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
             CastInitialType.Hold => new HoldCastInitial(_spellSign, _castInput),
             _ => new InstantCastInitial(),
         };
+
     public void Cast(Timer reloadTimer, Spell spell, Ray direction, GameObject target = null)
     {
         spell.Use(reloadTimer, direction, target);
@@ -47,6 +48,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
                 break;
         }
         slot.Diselect();
+        _spellSign.Hide();
     }
 
     public void EnableInput()

@@ -7,11 +7,10 @@ public class SpellTest : MonoBehaviour
     [SerializeField] private SpellInventory _inventory;
     private void Awake()
     {
-        for(int i = 0; i< _inventory.SlotsCount; i++)
-        {
-            Spell testSpell = new TestSpell(i + 1);
-            _inventory.AddSpell(testSpell, i);
-        }
+        _inventory.AddSpell(new TestSpell(1), 0);
+        _inventory.AddSpell(new TestSpell(10), 1);
+        _inventory.AddSpell(new TestHoldSpell(3), 2);
+
     }
 }
 
@@ -28,5 +27,20 @@ public class TestSpell : Spell, IStorable
     protected override void OnSpellUse(Ray direction, GameObject target = null)
     {
         Debug.Log($"Cast test spell {direction.origin}");
+    }
+}
+
+public class TestHoldSpell : Spell
+{
+    public TestHoldSpell(float reloadTime) : base(reloadTime)
+    {
+    }
+    public override CastType CastType => CastType.Shoot;
+
+    public override CastInitialType CastInitialType => CastInitialType.Hold;
+
+    protected override void OnSpellUse(Ray direction, GameObject target = null)
+    {
+        Debug.Log($"Cast hold test spell from {direction.origin} in direction {direction.direction}");
     }
 }
