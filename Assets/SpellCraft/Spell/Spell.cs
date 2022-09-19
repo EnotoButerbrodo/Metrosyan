@@ -22,18 +22,12 @@ public abstract class Spell : IStorable
 
     private float _reloadTime;
     private bool _reloading;
-    private float reloadTime;
 
     public Spell(float reloadTime = 1f, float castRange = 1f, float damage = 1f)
     {
         _reloadTime = reloadTime;
         _castRange = castRange;
         _damage = damage;
-    }
-
-    protected Spell(float reloadTime)
-    {
-        this.reloadTime = reloadTime;
     }
 
     private void Reload()

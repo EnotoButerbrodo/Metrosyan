@@ -7,8 +7,10 @@ using UnityEngine.InputSystem;
 
 public class SpellInventory : MonoBehaviour
 {
-    public event Action SlotSelected;
-    public event Action SlotDiselected;
+    public event Action<SpellInventorySlot> SlotSelected;
+    public event Action<SpellInventorySlot> SlotDiselected;
+
+    
 
     public event Action SelectedSlotReloading;
     public bool IsSpellSelected => _selectedSlot != null;
@@ -50,12 +52,12 @@ public class SpellInventory : MonoBehaviour
     {
         foreach(var slot in _slots)
         {
-            slot.Selected += OnSlotSelected;
-            slot.Diselected += OnSlotDiselected;
+            slot.Selected += OnSpellInventorySlotSelected;
+            slot.Diselected += OnSpellInventorySlotDiselected;
         }
     }
 
-    private void OnSlotSelected(SpellInventorySlot slot)
+    private void OnSpellInventorySlotSelected(SpellInventorySlot slot)
     {
         if(_selectedSlot == slot)
         {
@@ -65,18 +67,18 @@ public class SpellInventory : MonoBehaviour
         _selectedSlot?.Diselect();
         _selectedSlot = slot;
 
-        SlotSelected?.Invoke();
+        SlotSelected?.Invoke(_selectedSlot);
 
         
     }
 
-    private void OnSlotDiselected(SpellInventorySlot slot)
+    private void OnSpellInventorySlotDiselected(SpellInventorySlot slot)
     {
         if(_selectedSlot == slot)
         {
             _selectedSlot = null;
 
-            SlotDiselected?.Invoke();
+            SlotDiselected?.Invoke(slot);
         }
     }
 }

@@ -15,6 +15,8 @@ public class SpellInventorySlot : MonoBehaviour
     public bool IsSelected { get; private set; }
     public bool IsReloading => Slot?.CurrentItem?.Reloading is null ? false : Slot.CurrentItem.Reloading;
 
+    public bool IsEmpty => _link.SpellSlot.CurrentItem == null;
+
     private SpellInventorySlotLink _link;
 
 
