@@ -17,7 +17,7 @@ public class Aura : Spell
 
     public override CastType CastType => CastType.Target;
 
-    public override CastTime CastTime => CastTime.Instantly;
+    public override CastInitialType CastInitialType => CastInitialType.Instantly;
 
     public void Init(Attack auraAttack, AuraConfig auraConfig)
     {

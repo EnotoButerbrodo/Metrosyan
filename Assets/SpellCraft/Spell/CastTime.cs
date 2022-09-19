@@ -1,7 +1,7 @@
 ﻿using System;
 
 [Serializable]
-public enum CastTime
+public enum CastInitialType
 {
     Instantly, //Мнгновенно
     Delay, //Время каста

@@ -10,7 +10,7 @@ public abstract class Spell : IStorable
 {
     public Action<Spell> Used;
     public abstract CastType CastType { get; }
-    public abstract CastTime CastTime { get; }
+    public abstract CastInitialType CastInitialType { get; }
     public bool Reloading => _reloading;
     public float ReloadTime => _reloadTime;
     public float CastRange => _castRange;

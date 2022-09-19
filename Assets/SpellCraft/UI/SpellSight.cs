@@ -63,7 +63,7 @@ public class SpellSight : MonoBehaviour, IInputLisener
         _transform.position = position;
     }
 
-    private void ChangeColor(Color color)
+    public void ChangeColor(Color color)
     {
         _spriteRenderer.color = color;
     }

@@ -23,7 +23,7 @@ public class TestSpell : Spell, IStorable
 
     Sprite IStorable.Sprite { get; set; }
     public override CastType CastType => CastType.Call;
-    public override CastTime CastTime => CastTime.Instantly;
+    public override CastInitialType CastInitialType => CastInitialType.Instantly;
 
     protected override void OnSpellUse(Ray direction, GameObject target = null)
     {

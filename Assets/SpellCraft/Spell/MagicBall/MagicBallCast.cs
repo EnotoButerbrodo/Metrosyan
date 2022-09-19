@@ -13,7 +13,7 @@ public class MagicBallCast : Spell
 
     public override CastType CastType => CastType.Shoot;
 
-    public override CastTime CastTime => CastTime.Instantly;
+    public override CastInitialType CastInitialType => CastInitialType.Instantly;
 
     public void Init(MagicBall magicBall, int damage, Core core)
     {
