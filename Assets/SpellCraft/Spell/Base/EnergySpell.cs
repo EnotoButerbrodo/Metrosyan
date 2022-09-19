@@ -2,13 +2,13 @@
 {
     protected float _damage;
     protected float _radius;
-    protected float _range;
+    protected float _castRange;
 
-    public EnergySpell(float reloadTime, float damage, float radius, float range) : base(reloadTime)
+    public EnergySpell(float reloadTime, float damage, float radius, float castRange) : base(reloadTime)
     {
         _damage = damage;
         _radius = radius;
-        _range = range;
+        _castRange = castRange;
     }
 }
 

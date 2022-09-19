@@ -8,10 +8,10 @@ public class HoldCastInitial : SpellCastInitialHandler
     public override event Action CastStarted;
     public override event Action Initialized;
 
-    private SpellSight _spellSight;
+    private SpellSighManager _spellSight;
     private InputActionReference _castInput;
 
-    public HoldCastInitial(SpellSight spellSight, InputActionReference castInput)
+    public HoldCastInitial(SpellSighManager spellSight, InputActionReference castInput)
     {
         _spellSight = spellSight;
         _castInput = castInput;

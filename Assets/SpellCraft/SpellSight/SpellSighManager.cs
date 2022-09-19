@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class SpellSight : MonoBehaviour, IInputLisener
+public class SpellSighManager : MonoBehaviour, IInputLisener
 {
     public Vector3 Position => transform.position;
 

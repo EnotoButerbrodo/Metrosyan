@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 117803822}
   - component: {fileID: 117803821}
-  - component: {fileID: 117803820}
+  - component: {fileID: 117803823}
   m_Layer: 0
   m_Name: SpellSight
   m_TagString: Untagged
@@ -141,24 +141,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &117803820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 117803819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a082fc22567a8e45afd47dbcaa813ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cursorInput: {fileID: 2960426773207092260, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
-  _spriteRenderer: {fileID: 117803821}
-  _groundOffset: 0.186
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!212 &117803821
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -226,6 +208,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &117803823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117803819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a082fc22567a8e45afd47dbcaa813ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cursorInput: {fileID: 2960426773207092260, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
+  _spriteRenderer: {fileID: 117803821}
+  _groundOffset: 0.19
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &406632478
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,7 +796,6 @@ GameObject:
   - component: {fileID: 1620915850}
   - component: {fileID: 1620915849}
   - component: {fileID: 1620915852}
-  - component: {fileID: 1620915851}
   m_Layer: 0
   m_Name: Caster
   m_TagString: Untagged
@@ -819,7 +818,7 @@ MonoBehaviour:
   NotEnouthStamina:
     m_PersistentCalls:
       m_Calls: []
-  _spellSign: {fileID: 117803820}
+  _spellSign: {fileID: 117803823}
   _castInput: {fileID: 2458913617926032314, guid: 1687728fce4df4a4f9b2a9accd63a91c, type: 3}
   _spellInventory: {fileID: 1535567470}
   _spellSelector: {fileID: 1147598990}
@@ -838,19 +837,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1620915851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1620915846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 859c580314b91c84c827560f40f620ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _reversed: 0
 --- !u!114 &1620915852
 MonoBehaviour:
   m_ObjectHideFlags: 0
