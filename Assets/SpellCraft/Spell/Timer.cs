@@ -10,10 +10,10 @@ public class Timer : MonoBehaviour
     public Action Finished;
     private bool _stopRequsted;
 
-    public bool IsFinished { get; private set; }
+    public bool IsStarted { get; private set; }
     public void StartTimer(float time)
     {
-        IsFinished = false;
+        IsStarted = true;
         StartCoroutine(TimerHandler(time));
 
     }
@@ -40,7 +40,7 @@ public class Timer : MonoBehaviour
             yield return null;
         }
 
-        IsFinished = true;
+        IsStarted = false;
         Finished?.Invoke();
     }
 }

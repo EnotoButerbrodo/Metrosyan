@@ -22,6 +22,11 @@ public class SpellInventorySlot : MonoBehaviour
 
     public void Select()
     {
+        if (IsEmpty)
+        {
+            return;
+        }
+
         IsSelected = true;
 
         Selected?.Invoke(this);

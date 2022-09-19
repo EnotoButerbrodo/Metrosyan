@@ -33,6 +33,7 @@ public class DelayCastInitial : SpellCastInitialHandler
         _castTimer.StartTimer(_castTime);
 
         _spellSight.Show();
+        CastStarted?.Invoke();
     }
 
     public override void Disable()
@@ -40,14 +41,14 @@ public class DelayCastInitial : SpellCastInitialHandler
         _castTimer.Tick -= OnCastTimerTick;
         _castTimer.Finished -= OnCastTimerFinished;
 
-        if (_castTimer.IsFinished == false)
+        if (_castTimer.IsStarted == true)
         {
             _castTimer.Stop();
         }
     }
     private void Enable()
     {
-        if (_castTimer.IsFinished == false)
+        if (_castTimer.IsStarted == true)
         {
             _castTimer.Stop();
         }

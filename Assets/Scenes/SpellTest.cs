@@ -8,8 +8,8 @@ public class SpellTest : MonoBehaviour
     private void Awake()
     {
         _inventory.AddSpell(new TestSpell(1), 0);
-        _inventory.AddSpell(new TestSpell(10), 1);
-        _inventory.AddSpell(new TestHoldSpell(3), 2);
+        _inventory.AddSpell(new TestHoldSpell(3), 1);
+        _inventory.AddSpell(new TestDelaySpell(5), 2);
 
     }
 }
@@ -42,5 +42,21 @@ public class TestHoldSpell : Spell
     protected override void OnSpellUse(Ray direction, GameObject target = null)
     {
         Debug.Log($"Cast hold test spell from {direction.origin} in direction {direction.direction}");
+    }
+}
+
+public class TestDelaySpell : Spell
+{
+    public TestDelaySpell(float reloadTime) : base(reloadTime)
+    {
+
+    }
+    public override CastType CastType => CastType.Call;
+
+    public override CastInitialType CastInitialType => CastInitialType.Delay;
+
+    protected override void OnSpellUse(Ray direction, GameObject target = null)
+    {
+        Debug.Log($"Cast delay test spell in {direction.origin}");
     }
 }

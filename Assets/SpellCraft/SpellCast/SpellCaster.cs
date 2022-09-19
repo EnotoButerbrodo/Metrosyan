@@ -16,7 +16,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         => slot.Slot.CurrentItem.CastInitialType switch
         {
             CastInitialType.Instantly => new InstantCastInitial(),
-            CastInitialType.Delay => new DelayCastInitial(1, slot.SlotReloadTimer, _spellSign),
+            CastInitialType.Delay => new DelayCastInitial(3, slot.SlotReloadTimer, _spellSign),
             CastInitialType.Hold => new HoldCastInitial(_spellSign, _castInput),
             _ => new InstantCastInitial(),
         };
