@@ -17,7 +17,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         => slot.Slot.CurrentItem.CastInitialType switch
         {
             CastInitialType.Instantly => new InstantCastInitial(),
-            CastInitialType.Delay => new DelayCastInitial(3, slot.CastTimer, _spellSign, _spellSelector),
+            CastInitialType.Delay => new DelayCastInitial(3, slot.CastTimer, _spellSign),
             CastInitialType.Hold => new HoldCastInitial(_spellSign, _castInput),
             _ => new InstantCastInitial(),
         };
@@ -41,8 +41,6 @@ public class SpellCaster : MonoBehaviour, IInputLisener
 
     private void CastSpell()
     {
-        _spellSelector.DisableInput();
-
         SpellInventorySlot slot = _spellInventory.SelectedSlot;
         Timer reloadTimer = _spellInventory.SelectedSlot.ReloadTimer;
         Spell spell = slot.Slot.CurrentItem;
@@ -77,6 +75,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         _castInitialHadler = GetInitHandler(slot);
         _castInitialHadler.Initialized += CastSpell;
 
+        _spellSelector.DisableInput();
         _castInitialHadler.InitialCast();
 
     }

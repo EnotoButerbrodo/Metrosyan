@@ -16,23 +16,20 @@ public class DelayCastInitial : SpellCastInitialHandler
     private float _castTime;
     private Timer _castTimer;
     private SpellSighManager _spellSight;
-    private IInputLisener _slotSelectLisener;
 
     private Color _startColor = Color.green;
     private Color _endColor = Color.red;
 
-    public DelayCastInitial(float castTime, Timer castTimer, SpellSighManager spellSight, IInputLisener slotSelectLisener)
+    public DelayCastInitial(float castTime, Timer castTimer, SpellSighManager spellSight)
     {
         _castTime = castTime;
         _castTimer = castTimer;
         _spellSight = spellSight;
-        _slotSelectLisener = slotSelectLisener;
     }
 
     public override void InitialCast()
     {
         Enable();
-        _slotSelectLisener.DisableInput();
         _castTimer.StartTimer(_castTime);
 
         _spellSight.Show();
@@ -49,7 +46,6 @@ public class DelayCastInitial : SpellCastInitialHandler
             _castTimer.Stop();
         }
 
-        _slotSelectLisener.EnableInput();
     }
     private void Enable()
     {
@@ -64,7 +60,6 @@ public class DelayCastInitial : SpellCastInitialHandler
     private void OnCastTimerFinished()
     {
         Disable();
-        _slotSelectLisener.EnableInput();
         Initialized?.Invoke();
     }
 
