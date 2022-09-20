@@ -8,4 +8,6 @@ public abstract class SpellSight : MonoBehaviour
     public abstract void Disable();
 
     public abstract void Move(Vector3 position);
+
+    public abstract void SetColor(Color color);
 }

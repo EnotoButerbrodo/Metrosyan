@@ -25,7 +25,7 @@ public class AreaSpellSight : SpellSight
     public override void Move(Vector3 position)
     {
         
-        _transform.position = position;
+        _transform.position = position + (transform.up * 0.5f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,5 +36,10 @@ public class AreaSpellSight : SpellSight
     private void OnTriggerExit(Collider other)
     {
         _renderer.gameObject.SetActive(true);
+    } 
+     
+    public override void SetColor(Color color)
+    {
+        throw new System.NotImplementedException();
     }
 }
