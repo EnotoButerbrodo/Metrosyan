@@ -2,10 +2,12 @@
 
 public class AreaSpellSight : SpellSight
 {
+    [SerializeField] private SpriteRenderer _renderer;
+
     private Transform _transform;
     public override Ray GetPosition()
         => new Ray(_transform.position, Vector3.zero);
-    
+
     public override void Enable()
     {
         gameObject.SetActive(true);
@@ -20,8 +22,19 @@ public class AreaSpellSight : SpellSight
         _transform = GetComponent<Transform>();
     }
 
-    public override void Move(Ray position)
+    public override void Move(Vector3 position)
     {
-        _transform.position = position.origin;
+        
+        _transform.position = position;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        _renderer.gameObject.SetActive(false);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _renderer.gameObject.SetActive(true);
     }
 }

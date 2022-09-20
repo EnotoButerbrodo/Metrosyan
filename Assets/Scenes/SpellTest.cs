@@ -5,12 +5,16 @@ using UnityEngine;
 public class SpellTest : MonoBehaviour
 {
     [SerializeField] private SpellInventory _inventory;
+
+    [SerializeField] private SpellSightMover _r;
     private void Awake()
     {
         _inventory.AddSpell(new TestSpell(1), 0);
         _inventory.AddSpell(new TestHoldSpell(3), 1);
         _inventory.AddSpell(new TestDelaySpell(5), 2);
         _inventory.AddSpell(new Beam(3, 10, 10, 10), 3);
+
+        _r.EnableInput();
     }
 }
 

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-
 public class ShootSpellSight : SpellSight
 {
     public override void Enable()
@@ -16,8 +15,13 @@ public class ShootSpellSight : SpellSight
         return new Ray(transform.position, transform.rotation.eulerAngles);
     }
 
-    public override void Move(Ray position)
+    public override void Move(Vector3 position)
     {
-        transform.LookAt(position.direction);
+        transform.position = position;
+    }
+
+    public void Rotate(Vector3 rotation)
+    {
+        transform.LookAt(rotation);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SpellSighCaster : MonoBehaviour
+public class SpellSightCaster : MonoBehaviour
 {
     [SerializeField] private LayerMask _castLayerMask;
     private Camera _camera;

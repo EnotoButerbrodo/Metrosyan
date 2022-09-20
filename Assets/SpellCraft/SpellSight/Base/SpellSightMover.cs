@@ -1,23 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
-public abstract class SpellSightMover : MonoBehaviour , IInputLisener
+public class SpellSightMover : InputActionLisener
 {
     [SerializeField] protected SpellSight _spellSight;
-    [SerializeField] protected InputActionReference _moveInput;
-    [SerializeField] protected SpellSighCaster _caster;
+    [SerializeField] protected SpellSightCaster _caster;
 
-    public void EnableInput()
+    protected override void OnInput(InputAction.CallbackContext c)
     {
-        _moveInput.action.Enable();
-        _moveInput.action.performed += OnMoveInput;
+        if(_caster.TryGetSignPosition(_inputAction.action.ReadValue<Vector2>(),
+                                        out Vector3 sightPosition))
+        {
+            _spellSight.Move(sightPosition);
+        }
     }
-    public void DisableInput()
-    {
-        _moveInput.action.Disable();
-        _moveInput.action.performed -= OnMoveInput;
-    }
-
-    protected abstract void OnMoveInput(InputAction.CallbackContext c);
-
-    
 }

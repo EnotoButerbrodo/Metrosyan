@@ -7,5 +7,5 @@ public abstract class SpellSight : MonoBehaviour
     public abstract void Enable();
     public abstract void Disable();
 
-    public abstract void Move(Ray position);
+    public abstract void Move(Vector3 position);
 }
