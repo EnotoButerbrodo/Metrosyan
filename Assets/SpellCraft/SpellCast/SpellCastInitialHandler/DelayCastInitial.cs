@@ -15,12 +15,12 @@ public class DelayCastInitial : SpellCastInitialHandler
 
     private float _castTime;
     private Timer _castTimer;
-    private SpellSighManager _spellSight;
+    private AreaSpellSight _spellSight;
 
     private Color _startColor = Color.green;
     private Color _endColor = Color.red;
 
-    public DelayCastInitial(float castTime, Timer castTimer, SpellSighManager spellSight)
+    public DelayCastInitial(float castTime, Timer castTimer, AreaSpellSight spellSight)
     {
         _castTime = castTime;
         _castTimer = castTimer;
@@ -32,7 +32,7 @@ public class DelayCastInitial : SpellCastInitialHandler
         Enable();
         _castTimer.StartTimer(_castTime);
 
-        _spellSight.Show();
+        _spellSight.Enable();
         CastStarted?.Invoke();
     }
 
@@ -40,6 +40,7 @@ public class DelayCastInitial : SpellCastInitialHandler
     {
         _castTimer.Tick -= OnCastTimerTick;
         _castTimer.Finished -= OnCastTimerFinished;
+
 
         if (_castTimer.IsStarted == true)
         {
@@ -60,6 +61,7 @@ public class DelayCastInitial : SpellCastInitialHandler
     private void OnCastTimerFinished()
     {
         Disable();
+        _spellSight.Disable();
         Initialized?.Invoke();
     }
 

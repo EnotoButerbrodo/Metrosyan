@@ -8,10 +8,10 @@ public class HoldCastInitial : SpellCastInitialHandler
     public override event Action CastStarted;
     public override event Action Initialized;
 
-    private SpellSighManager _spellSight;
+    private AreaSpellSight _spellSight;
     private InputActionReference _castInput;
 
-    public HoldCastInitial(SpellSighManager spellSight, InputActionReference castInput)
+    public HoldCastInitial(AreaSpellSight spellSight, InputActionReference castInput)
     {
         _spellSight = spellSight;
         _castInput = castInput;
@@ -20,7 +20,7 @@ public class HoldCastInitial : SpellCastInitialHandler
     public override void InitialCast()
     {
         Enable();
-        _spellSight.Show();
+        _spellSight.Enable();
     }
     public override void Disable()
     {
@@ -34,6 +34,7 @@ public class HoldCastInitial : SpellCastInitialHandler
     private void OnCastButton(InputAction.CallbackContext c)
     {
         Disable();
+        _spellSight.Disable();
         Initialized?.Invoke();
     }
 

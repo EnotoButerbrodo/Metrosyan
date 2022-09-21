@@ -23,7 +23,11 @@ public class AreaSpellSight : SpellSight
     public override Ray GetPosition()
     => new Ray(_basicSight.transform.position, Vector3.zero);
 
-    [ContextMenu("Enable")]
+    public void ChangeColor(Color color)
+    {
+        _basicSight.color = color;
+    }
+
     public override void Enable()
     {
         gameObject.SetActive(true);
@@ -31,7 +35,6 @@ public class AreaSpellSight : SpellSight
         _sightMoveInput.action.Enable();
     }
 
-    [ContextMenu("Disable")]
     public override void Disable()
     {
         gameObject.SetActive(false);

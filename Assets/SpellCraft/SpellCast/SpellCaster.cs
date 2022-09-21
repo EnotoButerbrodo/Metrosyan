@@ -7,6 +7,7 @@ public class SpellCaster : MonoBehaviour, IInputLisener
 {
     public UnityEvent NotEnouthStamina;
     [SerializeField] private SpellSighManager _spellSign;
+    [SerializeField] private AreaSpellSight _areaSpellSight;
     [SerializeField] private InputActionReference _castInput;
     [SerializeField] private SpellInventory _spellInventory;
     [SerializeField] private SpellSelector _spellSelector;
@@ -17,8 +18,8 @@ public class SpellCaster : MonoBehaviour, IInputLisener
         => slot.Slot.CurrentItem.CastInitialType switch
         {
             CastInitialType.Instantly => new InstantCastInitial(),
-            CastInitialType.Delay => new DelayCastInitial(3, slot.CastTimer, _spellSign),
-            CastInitialType.Hold => new HoldCastInitial(_spellSign, _castInput),
+            CastInitialType.Delay => new DelayCastInitial(3, slot.CastTimer, _areaSpellSight),
+            CastInitialType.Hold => new HoldCastInitial(_areaSpellSight, _castInput),
             _ => new InstantCastInitial(),
         };
 
