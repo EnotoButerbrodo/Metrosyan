@@ -6,7 +6,6 @@ public class SpellTest : MonoBehaviour
 {
     [SerializeField] private SpellInventory _inventory;
 
-    [SerializeField] private SpellSightMover _r;
     private void Awake()
     {
         _inventory.AddSpell(new TestSpell(1), 0);
@@ -14,7 +13,6 @@ public class SpellTest : MonoBehaviour
         _inventory.AddSpell(new TestDelaySpell(5), 2);
         _inventory.AddSpell(new Beam(3, 10, 10, 10), 3);
 
-        _r.EnableInput();
     }
 }
 

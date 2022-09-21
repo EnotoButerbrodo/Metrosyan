@@ -14,7 +14,6 @@ public class SpellSightMover : InputActionLisener
                                         out Vector3 sightPosition,
                                         out RaycastHit hit))
         {
-            _spellSight.Move(sightPosition);
             _spellSight.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
    
         }
