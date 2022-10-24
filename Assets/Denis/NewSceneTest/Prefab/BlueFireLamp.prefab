@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7408689646657038630
 Transform:
@@ -132,7 +132,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7703902540796393018
 Transform:
@@ -143,7 +143,7 @@ Transform:
   m_GameObject: {fileID: 7703902540796160538}
   m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
   m_LocalPosition: {x: 8.126, y: -19.45, z: 0.725}
-  m_LocalScale: {x: 0.61109, y: 0.61109, z: 0.61109}
+  m_LocalScale: {x: 0.6110902, y: 0.61109, z: 0.6110902}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7708078136318781824}
@@ -211,7 +211,7 @@ Animator:
   m_GameObject: {fileID: 7703902540796160538}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6b2a7ea881422644f9cd78cd5b3b9247, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e955addcdf53cc241b6087bed5f4a36b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
